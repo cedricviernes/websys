@@ -16,20 +16,25 @@
     <table style="width:85%; margin: 0 auto; border-collapse: separate; border-spacing: 0 12px; background: #fff;">
         <thead>
             <tr style="background: #f3f4f6;">
+                <th style="padding: 1rem 1.5rem; border-bottom: 2px solid #e5e7eb; text-align: left;">Image</th>
                 <th style="padding: 1rem 1.5rem; border-bottom: 2px solid #e5e7eb; text-align: left;">Name</th>
                 <th style="padding: 1rem 1.5rem; border-bottom: 2px solid #e5e7eb; text-align: left;">Price</th>
                 <th style="padding: 1rem 1.5rem; border-bottom: 2px solid #e5e7eb; text-align: left;">Description</th>
-                <!-- <th style="padding: 1rem 1.5rem; border-bottom: 2px solid #e5e7eb; text-align: left;">Category</th> -->
                 <th style="padding: 1rem 1.5rem; border-bottom: 2px solid #e5e7eb; text-align: center;">Actions</th>
             </tr>
         </thead>
         <tbody>
             @forelse($products as $product)
             <tr style="border-bottom: 1px solid #e5e7eb;">
+                <!-- Image Column -->
+                <td style="padding: 1rem 1.5rem;">
+                    <img src="{{ $product->productImage ? asset('storage/' . $product->productImage) : 'https://via.placeholder.com/100' }}" 
+                         alt="{{ $product->name }}" 
+                         style="width: 100px; height: 100px; object-fit: cover; border-radius: 4px;">
+                </td>
                 <td style="padding: 1rem 1.5rem;">{{ $product->name }}</td>
-                <td style="padding: 1rem 1.5rem;">{{ $product->price }}</td>
+                <td style="padding: 1rem 1.5rem;">₱{{ number_format($product->price, 2) }}</td>
                 <td style="padding: 1rem 1.5rem;">{{ $product->description }}</td>
-                <!-- <td style="padding: 1rem 1.5rem;">{{ $product->category }}</td> -->
                 <td style="padding: 1rem 1.5rem; text-align: center;">
                     <div style="display: flex; gap: 0.5rem; justify-content: center; align-items: center;">
                         <a href="{{ route('admin.products.show', $product) }}" style="background: #0ea5e9; color: #fff; padding: 0.4rem 1rem; border-radius: 4px; text-decoration: none;">View</a>
@@ -48,7 +53,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="4" style="padding: 1rem; text-align: center; color: #6b7280;">No products found.</td>
+                <td colspan="5" style="padding: 1rem; text-align: center; color: #6b7280;">No products found.</td>
             </tr>
             @endforelse
         </tbody>

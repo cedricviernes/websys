@@ -5,8 +5,16 @@
     <h1 style="margin-bottom: 1.5rem;">Product Details</h1>
 
     <div style="background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); padding: 2rem;">
+        <!-- Display Product Image -->
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <img src="{{ $product->productImage ? asset('storage/' . $product->productImage) : 'https://via.placeholder.com/300' }}" 
+                 alt="{{ $product->name }}" 
+                 style="width: 300px; height: 300px; object-fit: cover; border-radius: 8px;">
+        </div>
+
+        <!-- Product Details -->
         <h3 style="margin-bottom: 0.5rem;">{{ $product->name }}</h3>
-        <h5 style="color: #6b7280; margin-bottom: 1rem;">Price: <span style="color: #2563eb;">{{ $product->price }}</span></h5>
+        <h5 style="color: #6b7280; margin-bottom: 1rem;">Price: <span style="color: #2563eb;">₱{{ number_format($product->price, 2) }}</span></h5>
         <p style="margin-bottom: 1rem;">{{ $product->description }}</p>
         @if($product->category)
             <p style="margin-bottom: 1rem;"><strong>Category:</strong> {{ $product->category->name }}</p>
