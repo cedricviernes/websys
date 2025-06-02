@@ -45,7 +45,7 @@ class CartController extends Controller
 
         foreach ($quantities as $productId => $quantity) {
             if (isset($cart[$productId])) {
-                $cart[$productId]['quantity'] = is_array($quantity) ? 1 : (int) $quantity; // Ensure quantity is an integer
+                $cart[$productId]['quantity'] = is_numeric($quantity) && $quantity > 0 ? (int) $quantity : 1; // Ensure quantity is valid
             }
         }
 
@@ -57,11 +57,11 @@ class CartController extends Controller
     public function remove(Request $request)
     {
         $cart = session()->get('cart', []);
-        $productId = $request->product_id;
+        $productId = $request->input('product_id'); // Retrieve the product ID from the form
 
         if (isset($cart[$productId])) {
-            unset($cart[$productId]);
-            session(['cart' => $cart]);
+            unset($cart[$productId]); // Remove the product from the cart
+            session(['cart' => $cart]); // Update the session
         }
 
         return redirect()->route('cart.index')->with('success', 'Item removed from cart!');

@@ -38,7 +38,13 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'description' => 'nullable|string',
             'category_id' => 'required|exists:categories,id',
+            'productImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate image
         ]);
+
+        if ($request->hasFile('productImage')) {
+            $path = $request->file('productImage')->store('product_images', 'public'); // Save image to storage/app/public/product_images
+            $validated['productImage'] = $path;
+        }
 
         Product::create($validated);
 
@@ -72,7 +78,19 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'description' => 'nullable|string',
             'category_id' => 'required|exists:categories,id',
+            'productImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate image
         ]);
+
+        if ($request->hasFile('productImage')) {
+            // Delete the old image if it exists
+            if ($product->productImage && \Storage::exists('public/' . $product->productImage)) {
+                \Storage::delete('public/' . $product->productImage);
+            }
+
+            // Store the new image
+            $path = $request->file('productImage')->store('product_images', 'public');
+            $validated['productImage'] = $path;
+        }
 
         $product->update($validated);
 

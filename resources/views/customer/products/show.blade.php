@@ -18,7 +18,10 @@
     <div style="width: 85%; margin: 0 auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 1.5rem;">
         <div style="display: flex; gap: 2rem;">
             <div style="flex: 1;">
-                <img src="{{ $product->image_url ?? 'https://via.placeholder.com/300x300?text=No+Image' }}" alt="{{ $product->name }}" style="width: 100%; border-radius: 8px; object-fit: cover;">
+                <!-- Updated Image Display -->
+                <img src="{{ $product->productImage ? asset('storage/' . $product->productImage) : 'https://via.placeholder.com/300x300?text=No+Image' }}" 
+                     alt="{{ $product->name }}" 
+                     style="width: 100%; border-radius: 8px; object-fit: cover;">
             </div>
             <div style="flex: 2;">
                 <h2 style="margin-bottom: 1rem; font-size: 1.8rem; color: #111;">{{ $product->name }}</h2>

@@ -62,7 +62,7 @@
                                             @csrf
                                             <input type="hidden" name="product_id" value="{{ $item['id'] }}">
                                             <button type="submit" style="background: #f87171; color: #fff; padding: 0.5rem 1rem; border-radius: 4px; border: none; cursor: pointer;" title="Remove" aria-label="Remove Product">
-                                                <i class="bi bi-trash"></i>
+                                                Delete <i class="bi bi-trash"></i>
                                             </button>
                                         </form>
                                     </td>

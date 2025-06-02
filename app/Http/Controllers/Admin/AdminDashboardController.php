@@ -15,8 +15,8 @@ class AdminDashboardController extends Controller
     public function index()
     {
         $bestSelling = Product::join('order_items', 'products.id', '=', 'order_items.product_id')
-            ->selectRaw('products.id, products.name, products.price, products.description, SUM(order_items.quantity) as total_sold')
-            ->groupBy('products.id', 'products.name', 'products.price', 'products.description')
+            ->selectRaw('products.id, products.name, products.price, products.description, products.productImage, SUM(order_items.quantity) as total_sold')
+            ->groupBy('products.id', 'products.name', 'products.price', 'products.description', 'products.productImage')
             ->orderByDesc('total_sold')
             ->get();
 
