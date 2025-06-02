@@ -26,8 +26,8 @@ Route::get('/dashboard', function () {
 Route::get('about', function () {
     return view('about'); })->name('about');
 
-Route::get('/products', function () {
-    return view('products.index'); })->name('products');
+// Route::get('/products', function () {
+//     return view('products.index'); })->name('products');
 
 Route::get('/contact', function () {
     return view('contact'); })->name('contact');
@@ -64,7 +64,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 });
 
 // Customer product & category browsing
-Route::get('/products', [CustomerProductController::class, 'index'])->name('products.index');
+Route::get('/products', [CustomerProductController::class, !auth()->check() ? 'indexGuest' : 'index'])->name('products.index');
 
 // Show product details
 Route::get('/products/{product}', [CustomerProductController::class, 'show'])->name('products.show');

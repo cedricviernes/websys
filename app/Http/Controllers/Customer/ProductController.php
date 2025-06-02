@@ -32,6 +32,25 @@ class ProductController extends Controller
 
         return view('customer.products.index', compact('products', 'categories'));
     }
+    public function indexGuest(Request $request)
+    {
+        $query = Product::query();
+
+        // Search by name
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        // Filter by category
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+
+        $products = $query->paginate(12);
+        $categories = Category::all();
+
+        return view('customer.products.index-guest', compact('products', 'categories'));
+    }
 
     // Show product details
     public function show($id)
