@@ -1,5 +1,5 @@
 
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container" style="max-width: 600px; margin: 2rem auto;">

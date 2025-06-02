@@ -23,6 +23,9 @@ class AdminDashboardController extends Controller
         $topThree = $bestSelling->take(3);
         $otherProducts = $bestSelling->slice(3);
 
-        return view('admin.dashboard', compact('topThree', 'otherProducts'));
+        return view('admin.dashboard', [
+            'topThree' => $topThree,
+            'otherProducts' => $otherProducts,
+        ]);
     }
 }

@@ -4,6 +4,15 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Customer\CartController as CustomerCartController;
+use App\Http\Controllers\Customer\CheckoutController as CustomerCheckoutController;
+use App\Http\Controllers\Customer\OrderController as CustomerOrderController;
+use App\Http\Controllers\Customer\ReviewController as CustomerReviewController;
+use App\Http\Controllers\Customer\OrderController;
+use App\Http\Controllers\Customer\ProductController as CustomerProductController;
+use App\Http\Controllers\Customer\CategoryController as CustomerCategoryController;
 
 Route::get('/', function () {
     return view('welcome'); 
@@ -37,9 +46,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
 });
 
-// Example admin route group in routes/web.php
+// Admin routes
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
@@ -52,5 +62,29 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('reports/products', [ReportController::class, 'products'])->name('reports.products');
     Route::resource('discounts', \App\Http\Controllers\Admin\DiscountController::class);
 });
+
+// Customer product & category browsing
+Route::get('/products', [CustomerProductController::class, 'index'])->name('products.index');
+
+// Show product details
+Route::get('/products/{product}', [CustomerProductController::class, 'show'])->name('products.show');
+Route::get('/categories', [CustomerCategoryController::class, 'index'])->name('categories.index');
+Route::get('/categories/{category}', [CustomerCategoryController::class, 'show'])->name('categories.show');
+
+// Cart & checkout
+Route::get('/cart', [CustomerCartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add', [CustomerCartController::class, 'add'])->name('cart.add');
+Route::post('/cart/update', [CustomerCartController::class, 'update'])->name('cart.update');
+Route::post('/cart/remove', [CustomerCartController::class, 'remove'])->name('cart.remove');
+Route::get('/checkout', [CustomerCheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout', [CustomerCheckoutController::class, 'process'])->name('checkout.process');
+
+// Orders
+Route::get('/orders/{order}/confirmation', [OrderController::class, 'confirmation'])->name('orders.confirmation')->middleware('auth');
+Route::get('/orders/{order}/track', [OrderController::class, 'track'])->name('orders.track')->middleware('auth');
+Route::get('/orders/history', [OrderController::class, 'history'])->name('orders.history')->middleware('auth');
+
+// Reviews
+Route::post('/products/{product}/reviews', [CustomerReviewController::class, 'store'])->name('reviews.store')->middleware('auth');
 
 require __DIR__.'/auth.php';

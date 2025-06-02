@@ -44,4 +44,15 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+
+    /**
+     * Get the post-authentication redirection path for the user.
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->is_admin) {
+            return redirect()->route('admin.dashboard');
+        }
+        return redirect()->route('products.index');
+    }
 }
