@@ -12,11 +12,12 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <!-- <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
-                    </x-nav-link>
+                    </x-nav-link> -->
 
                     @if(auth()->check() && auth()->user()->is_admin)
+                        <!-- Admin links -->
                         <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                             Admin Dashboard
                         </x-nav-link>
@@ -37,6 +38,20 @@
                         </x-nav-link>
                         <x-nav-link :href="route('admin.discounts.index')" :active="request()->routeIs('admin.discounts.*')">
                             Discounts
+                        </x-nav-link>
+                    @else
+                        <!-- Customer links -->
+                        <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
+                            Products
+                        </x-nav-link>
+                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
+                            Categories
+                        </x-nav-link>
+                        <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
+                            Cart
+                        </x-nav-link>
+                        <x-nav-link :href="route('orders.history')" :active="request()->routeIs('orders.history')">
+                            Orders
                         </x-nav-link>
                     @endif
                 </div>

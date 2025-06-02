@@ -16,11 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('price', 10, 2);
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->timestamps();
-
-            // If you have a categories table and want a foreign key:
-            // $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
         });
     }
 

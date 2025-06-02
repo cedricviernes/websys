@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -39,6 +38,7 @@
             <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid #e5e7eb;">
         </div>
 
+        <div class="mb-3" style="margin-bottom: 1.5rem;">
         <div class="mb-3" style="margin-bottom: 1.5rem;">
             <label for="is_admin" class="form-label" style="font-weight: 500;">Role</label>
             <select name="is_admin" id="is_admin" class="form-control" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid #e5e7eb;">

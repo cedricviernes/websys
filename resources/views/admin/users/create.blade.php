@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -46,6 +45,7 @@
             </select>
         </div>
 
+        <div style="display: flex; gap: 1rem;">
         <div style="display: flex; gap: 1rem;">
             <button type="submit" class="btn btn-primary" style="background: #2563eb; color: #fff; border: none; padding: 0.5rem 1.5rem; border-radius: 4px;">Create User</button>
             <a href="{{ route('admin.users.index') }}" class="btn btn-secondary" style="background: #6b7280; color: #fff; padding: 0.5rem 1.5rem; border-radius: 4px; text-decoration: none;">Cancel</a>
