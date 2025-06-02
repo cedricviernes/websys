@@ -49,7 +49,7 @@ class ProductController extends Controller
         $products = $query->paginate(12);
         $categories = Category::all();
 
-        return view('customer.products.guest', compact('products', 'categories'));
+        return view('customer.products.index-guest', compact('products', 'categories'));
     }
 
     // Show product details
@@ -57,5 +57,24 @@ class ProductController extends Controller
     {
         $product = Product::with('reviews.user')->findOrFail($id);
         return view('customer.products.show', compact('product'));
+    }
+    // Show stuffed toys collection (Toys & Games)
+    public function toys(Request $request)
+    {
+         $query = Product::query();
+
+        // Search by name
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        // Filter by category
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+
+        $products = $query->paginate(12);
+        $categories = Category::all();
+        return view('products.toys', compact('products', 'categories'));
     }
 }

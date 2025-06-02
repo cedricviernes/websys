@@ -228,7 +228,15 @@
         </li>
       </ul>
       
-      <div class="auth-buttons">
+      <div class="auth-buttons d-flex align-items-center">
+        <a href="{{ route('cart.index') }}" class="btn btn-outline-secondary position-relative me-2">
+          🛒 Cart
+          @if(session('cart') && count(session('cart')) > 0)
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {{ count(session('cart')) }}
+            </span>
+          @endif
+        </a>
         @if (Route::has('login'))
           @auth
             <a href="{{ url('/dashboard') }}" class="btn btn-custom-dashboard">Dashboard</a>
@@ -258,7 +266,6 @@
             MINISO is a global lifestyle brand offering high-quality, affordable, and beautifully designed products. Founded in 2013 by Japanese designer Miyake Junya and Chinese entrepreneur Ye Guofu, MINISO brings together creativity,
              minimalism, and practicality to deliver daily life essentials across categories such as home goods, electronics, beauty, toys, and more.
           </p>
-          
           <h2 style="color: #ff6f61; margin-top: 2rem;" >Our Mission</h2>
           <p>To provide high-quality, affordable products that enhance your lifestyle while maintaining a commitment to sustainability and innovation.</p>
           

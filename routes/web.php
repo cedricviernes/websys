@@ -39,8 +39,7 @@ Route::get('/faq', function () {
 Route::get('/privacy', function () {
     return view('privacy'); })->name('privacy');
 
-Route::get('/products/stuffed-toys', function () {
-    return view('products.toys'); })->name('products.toys');
+Route::get('/products/stuffed-toys', [CustomerProductController::class, 'toys'])->name('products.toys');
 
 
 Route::middleware('auth')->group(function () {

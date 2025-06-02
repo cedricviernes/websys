@@ -229,6 +229,14 @@
       </ul>
       
       <div class="auth-buttons">
+         <a href="{{ route('cart.index') }}" class="btn btn-outline-secondary position-relative me-2">
+          🛒 Cart
+          @if(session('cart') && count(session('cart')) > 0)
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {{ count(session('cart')) }}
+            </span>
+          @endif
+        </a>
         @if (Route::has('login'))
           @auth
             <a href="{{ url('/dashboard') }}" class="btn btn-custom-dashboard">Dashboard</a>

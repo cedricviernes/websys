@@ -173,6 +173,21 @@
     margin-top: 3rem;
   }
 
+  /* Category cards */
+  .card.border-0.shadow-sm {
+    min-height: 370px;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+  }
+
+  .card-body.text-center {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .welcome-title {
@@ -228,7 +243,15 @@
         </li>
       </ul>
       
-      <div class="auth-buttons">
+      <div class="auth-buttons d-flex align-items-center">
+        <a href="{{ route('cart.index') }}" class="btn btn-outline-secondary position-relative me-2">
+          🛒 Cart
+          @if(session('cart') && count(session('cart')) > 0)
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {{ count(session('cart')) }}
+            </span>
+          @endif
+        </a>
         @if (Route::has('login'))
           @auth
             <a href="{{ url('/dashboard') }}" class="btn btn-custom-dashboard">Dashboard</a>
@@ -260,9 +283,9 @@
               <div class="card border-0 shadow-sm">
                 <div class="card-body text-center">
                   <div style="font-size: 3rem; color: #ff6f61;">🧸</div>
-                  <h5 class="card-title">Toys & Games</h5>
-                  <p class="card-text">Fun and educational toys for all ages</p>
-                  <a href="{{ route('products.toys') }}" class="btn btn-outline-primary">View Collection</a>
+                  <h5 class="card-title">Gadgets</h5>
+                  <p class="card-text">This category includes smart devices, accessories, and portable tools that bring convenience, entertainment, and functionality to your fingertips.</p>
+                  <a href="{{ route('products.toys', ['category_id' => 1]) }}" class="btn btn-outline-primary">View Collection</a>
                 </div>
               </div>
             </div>
@@ -272,7 +295,7 @@
                   <div style="font-size: 3rem; color: #ff6f61;">🎒</div>
                   <h5 class="card-title">Bags & Accessories</h5>
                   <p class="card-text">Stylish and practical bags for every occasion</p>
-                  <a href="#" class="btn btn-outline-primary">View Collection</a>
+                  <a href="{{ route('products.toys', ['category_id' => 2]) }}" class="btn btn-outline-primary">View Collection</a>
                 </div>
               </div>
             </div>
@@ -282,7 +305,7 @@
                   <div style="font-size: 3rem; color: #ff6f61;">🍽️</div>
                   <h5 class="card-title">Kitchen & Dining</h5>
                   <p class="card-text">Modern kitchenware and dining essentials</p>
-                  <a href="#" class="btn btn-outline-primary">View Collection</a>
+                  <a href="{{ route('products.toys', ['category_id' => 3]) }}" class="btn btn-outline-primary">View Collection</a>
                 </div>
               </div>
             </div>

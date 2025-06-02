@@ -84,7 +84,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __(auth()->check() ? 'Log Out' : 'Log In') }}
+                                {{ __(Auth::user() ? 'Log Out' : 'Log In') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>

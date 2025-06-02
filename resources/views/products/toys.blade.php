@@ -228,7 +228,15 @@
         </li>
       </ul>
       
-      <div class="auth-buttons">
+      <div class="auth-buttons d-flex align-items-center">
+        <a href="{{ route('cart.index') }}" class="btn btn-outline-secondary position-relative me-2">
+          🛒 Cart
+          @if(session('cart') && count(session('cart')) > 0)
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {{ count(session('cart')) }}
+            </span>
+          @endif
+        </a>
         @if (Route::has('login'))
           @auth
             <a href="{{ url('/dashboard') }}" class="btn btn-custom-dashboard">Dashboard</a>
@@ -258,70 +266,36 @@
           Discover our delightful range of stuffed toys, perfect for children and collectors alike. Each toy is crafted with care to provide comfort, fun, and companionship.
         </p>
         <a href="{{ url('products') }}" class="btn btn-outline-secondary mt-4">←</a>
-        <div class="row mt-4">
-            <div class="col-md-4 mb-4">
+        @if(isset($products) && $products->count())
+          <div class="row mt-4">
+            @foreach($products as $product)
+              <div class="col-md-4 mb-4">
                 <div class="card border-0 shadow-sm">
-                <img src="{{ asset('images/cute.jfif') }}" class="card-img-top" alt="Stuffed Bear" width="300" height="300">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Classic Kitty Bear</h5>
-                    <p class="card-text">Soft and cuddly, the timeless kitty everyone loves.</p>
-                    <p class="card-text fw-bold">₱799.00</p>
+                  @if($product->productImage)
+                    <img src="{{ asset('storage/' . $product->productImage) }}" class="card-img-top" alt="{{ $product->name }}" width="300" height="300">
+                  @else
+                    <img src="{{ asset('images/default-toy.png') }}" class="card-img-top" alt="No image" width="300" height="300">
+                  @endif
+                  <div class="card-body text-center d-flex flex-column justify-content-between">
+                    <h5 class="card-title">{{ $product->name }}</h5>
+                    <p class="card-text">{{ $product->description }}</p>
+                    @if($product->price)
+                      <p class="card-text fw-bold">₱{{ number_format($product->price, 2) }}</p>
+                    @endif
+                    <form method="POST" action="{{ route('cart.add') }}" class="mt-2">
+                      @csrf
+                      <input type="hidden" name="product_id" value="{{ $product->id }}">
+                      <input type="hidden" name="quantity" value="1">
+                      <button type="submit" class="btn btn-primary w-100">Add to Cart</button>
+                    </form>
+                  </div>
                 </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow-sm">
-                <img src="{{ asset('images/hhh.jpg') }}" class="card-img-top" alt="Stuffed Rabbit" width="300" height="300">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Fluffy Cakey</h5>
-                    <p class="card-text">A cute and soft cake plush perfect for all ages.</p>
-                    <p class="card-text fw-bold">₱650.00</p>
-                </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow-sm">
-                <img src="{{ asset('images/cinnamoroll.jfif') }}" class="card-img-top" alt="Stuffed Elephant" width="300" height="300">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Cinnamoroll</h5>
-                    <p class="card-text">A lovable cinnamoroll to brighten your day.</p>
-                    <p class="card-text fw-bold">₱720.00</p>
-                </div>
-                </div>
-            </div>
-             <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow-sm">
-                <img src="{{ asset('images/bear.jfif') }}" class="card-img-top" alt="Stuffed Elephant" width="300" height="300">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Teddy Bear</h5>
-                    <p class="card-text">A classic, soft teddy bear that brings comfort and warmth.</p>
-                    <p class="card-text fw-bold">₱800.00</p>
-                </div>
-                </div>
-            </div>
-             <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow-sm">
-                <img src="{{ asset('images/strawberry.jfif') }}" class="card-img-top" alt="Stuffed Elephant" width="300" height="300">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Strawberry  Plushie</h5>
-                    <p class="card-text">A sweet and colorful strawberry plush, perfect for cuddles and smiles.</p>
-                    <p class="card-text fw-bold">₱480.00</p>
-                </div>
-                </div>
-            </div>
-             <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow-sm">
-                <img src="{{ asset('images/pengg.jfif') }}" class="card-img-top" alt="Stuffed Elephant" width="300" height="300">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Penguin Plushie</h5>
-                    <p class="card-text">An adorable penguin plush with a cozy, huggable design.</p>
-                    <p class="card-text fw-bold">₱399.00</p>
-                </div>
-                </div>
-            </div>
-            </div>
-
-        
+              </div>
+            @endforeach
+          </div>
+        @else
+          <div class="alert alert-info mt-4">No stuffed toys found.</div>
+        @endif
         
       </div>
     </div>
