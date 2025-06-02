@@ -224,10 +224,9 @@
           <a class="nav-link {{ Request::is('faq') ? 'active' : '' }}" href="{{ url('faq') }}">FAQs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('privacy') ? 'active' : '' }}" href="{{ url('/privacy') }}">Privacy</a>
+          <a class="nav-link {{ Request::is('privacy') ? 'active' : '' }}" href="{{ url('privacy') }}">Privacy</a>
         </li>
       </ul>
-      
       
       <div class="auth-buttons">
         @if (Route::has('login'))
@@ -249,34 +248,49 @@
   </div>
 </nav>
 
-<!-- Main Content -->
-<div class="main-container">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6 order-lg-1 order-2">
+@if(Request::is('products*'))
+    <div class="row">
+      <div class="col-12">
         <div class="welcome-card">
-          <h1 class="welcome-title">Let's Get Started!</h1>
-          <p class="welcome-text">Discover a colorful world of fun, quality, and affordability. Join Miniso-inspired shopping now!</p>
-          @auth
-            <a href="{{ url('/dashboard') }}" class="cta-button">Go to Dashboard</a>
-          @else
-            <a href="{{ route('register') }}" class="cta-button">Get Started</a>
-          @endauth
-        </div>
-      </div>
-      
-      <div class="col-lg-6 order-lg-2 order-1">
-        <div class="illustration">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-            <circle cx="32" cy="32" r="30" fill="#ff6f61"/>
-            <text x="50%" y="55%" text-anchor="middle" font-size="2rem" fill="#fff">🎈</text>
-          </svg>
+          <h1 class="welcome-title" style="text-align: center;">Our Products</h1>
+          <p class="welcome-text" style="text-align: center;">Explore our wide range of quality products designed to enhance your daily life with style and functionality.</p>
+          
+          <div class="row mt-4">
+            <div class="col-md-4 mb-4">
+              <div class="card border-0 shadow-sm">
+                <div class="card-body text-center">
+                  <div style="font-size: 3rem; color: #ff6f61;">🧸</div>
+                  <h5 class="card-title">Toys & Games</h5>
+                  <p class="card-text">Fun and educational toys for all ages</p>
+                  <a href="{{ route('products.toys') }}" class="btn btn-outline-primary">View Collection</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="card border-0 shadow-sm">
+                <div class="card-body text-center">
+                  <div style="font-size: 3rem; color: #ff6f61;">🎒</div>
+                  <h5 class="card-title">Bags & Accessories</h5>
+                  <p class="card-text">Stylish and practical bags for every occasion</p>
+                  <a href="#" class="btn btn-outline-primary">View Collection</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="card border-0 shadow-sm">
+                <div class="card-body text-center">
+                  <div style="font-size: 3rem; color: #ff6f61;">🍽️</div>
+                  <h5 class="card-title">Kitchen & Dining</h5>
+                  <p class="card-text">Modern kitchenware and dining essentials</p>
+                  <a href="#" class="btn btn-outline-primary">View Collection</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
+    @endif
 
 <!-- Footer -->
 <footer class="footer">
@@ -291,3 +305,4 @@
 
 </body>
 </html>
+

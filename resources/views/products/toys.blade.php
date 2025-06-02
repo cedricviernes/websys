@@ -224,10 +224,9 @@
           <a class="nav-link {{ Request::is('faq') ? 'active' : '' }}" href="{{ url('faq') }}">FAQs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('privacy') ? 'active' : '' }}" href="{{ url('/privacy') }}">Privacy</a>
+          <a class="nav-link {{ Request::is('privacy') ? 'active' : '' }}" href="{{ url('privacy') }}">Privacy</a>
         </li>
       </ul>
-      
       
       <div class="auth-buttons">
         @if (Route::has('login'))
@@ -249,36 +248,86 @@
   </div>
 </nav>
 
-<!-- Main Content -->
-<div class="main-container">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6 order-lg-1 order-2">
-        <div class="welcome-card">
-          <h1 class="welcome-title">Let's Get Started!</h1>
-          <p class="welcome-text">Discover a colorful world of fun, quality, and affordability. Join Miniso-inspired shopping now!</p>
-          @auth
-            <a href="{{ url('/dashboard') }}" class="cta-button">Go to Dashboard</a>
-          @else
-            <a href="{{ route('register') }}" class="cta-button">Get Started</a>
-          @endauth
-        </div>
-      </div>
-      
-      <div class="col-lg-6 order-lg-2 order-1">
-        <div class="illustration">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-            <circle cx="32" cy="32" r="30" fill="#ff6f61"/>
-            <text x="50%" y="55%" text-anchor="middle" font-size="2rem" fill="#fff">🎈</text>
-          </svg>
-        </div>
+@if(Request::is('products/stuffed-toys'))
+  <div class="row">
+    <div class="col-12">
+      <div class="welcome-card">
+        
+        <h1 class="welcome-title" style="text-align: center;">Stuffed Toys Collection</h1>
+        <p class="welcome-text" style="text-align: justify;">
+          Discover our delightful range of stuffed toys, perfect for children and collectors alike. Each toy is crafted with care to provide comfort, fun, and companionship.
+        </p>
+        <a href="{{ url('products') }}" class="btn btn-outline-secondary mt-4">←</a>
+        <div class="row mt-4">
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm">
+                <img src="{{ asset('images/cute.jfif') }}" class="card-img-top" alt="Stuffed Bear" width="300" height="300">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Classic Kitty Bear</h5>
+                    <p class="card-text">Soft and cuddly, the timeless kitty everyone loves.</p>
+                    <p class="card-text fw-bold">₱799.00</p>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm">
+                <img src="{{ asset('images/hhh.jpg') }}" class="card-img-top" alt="Stuffed Rabbit" width="300" height="300">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Fluffy Cakey</h5>
+                    <p class="card-text">A cute and soft cake plush perfect for all ages.</p>
+                    <p class="card-text fw-bold">₱650.00</p>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm">
+                <img src="{{ asset('images/cinnamoroll.jfif') }}" class="card-img-top" alt="Stuffed Elephant" width="300" height="300">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Cinnamoroll</h5>
+                    <p class="card-text">A lovable cinnamoroll to brighten your day.</p>
+                    <p class="card-text fw-bold">₱720.00</p>
+                </div>
+                </div>
+            </div>
+             <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm">
+                <img src="{{ asset('images/bear.jfif') }}" class="card-img-top" alt="Stuffed Elephant" width="300" height="300">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Teddy Bear</h5>
+                    <p class="card-text">A classic, soft teddy bear that brings comfort and warmth.</p>
+                    <p class="card-text fw-bold">₱800.00</p>
+                </div>
+                </div>
+            </div>
+             <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm">
+                <img src="{{ asset('images/strawberry.jfif') }}" class="card-img-top" alt="Stuffed Elephant" width="300" height="300">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Strawberry  Plushie</h5>
+                    <p class="card-text">A sweet and colorful strawberry plush, perfect for cuddles and smiles.</p>
+                    <p class="card-text fw-bold">₱480.00</p>
+                </div>
+                </div>
+            </div>
+             <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm">
+                <img src="{{ asset('images/pengg.jfif') }}" class="card-img-top" alt="Stuffed Elephant" width="300" height="300">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Penguin Plushie</h5>
+                    <p class="card-text">An adorable penguin plush with a cozy, huggable design.</p>
+                    <p class="card-text fw-bold">₱399.00</p>
+                </div>
+                </div>
+            </div>
+            </div>
+
+        
+        
       </div>
     </div>
   </div>
-</div>
+@endif
 
-
-<!-- Footer -->
 <footer class="footer">
   <div class="container">
     <p class="mb-1">&copy; {{ date('Y') }} Miniso Inspired. All rights reserved.</p>
