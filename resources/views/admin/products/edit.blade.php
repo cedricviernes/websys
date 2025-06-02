@@ -1,4 +1,3 @@
-
 @extends('layouts.admin')
 
 @section('content')
@@ -15,7 +14,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.products.update', $product) }}" method="POST">
+    <form action="{{ route('admin.products.update', $product) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -44,6 +43,22 @@
                     </option>
                 @endforeach
             </select>
+        </div>
+
+        <!-- Current Image -->
+        <div class="mb-3" style="margin-bottom: 1.5rem;">
+            <label class="form-label" style="font-weight: 500;">Current Image</label>
+            <div>
+                <img src="{{ $product->productImage ? asset('storage/' . $product->productImage) : 'https://via.placeholder.com/150' }}" 
+                     alt="{{ $product->name }}" 
+                     style="width: 150px; height: 150px; object-fit: cover; border-radius: 4px;">
+            </div>
+        </div>
+
+        <!-- Replace Image -->
+        <div class="mb-3" style="margin-bottom: 1.5rem;">
+            <label for="productImage" class="form-label" style="font-weight: 500;">Replace Image</label>
+            <input type="file" name="productImage" id="productImage" class="form-control" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid #e5e7eb;">
         </div>
 
         <div style="display: flex; gap: 1rem;">

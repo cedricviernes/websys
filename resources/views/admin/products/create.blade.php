@@ -1,4 +1,3 @@
-
 @extends('layouts.admin')
 
 @section('content')
@@ -15,7 +14,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.products.store') }}" method="POST">
+    <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3" style="margin-bottom: 1rem;">
@@ -43,6 +42,12 @@
                     </option>
                 @endforeach
             </select>
+        </div>
+
+        <!-- Image Upload -->
+        <div class="mb-3" style="margin-bottom: 1.5rem;">
+            <label for="productImage" class="form-label" style="font-weight: 500;">Product Image</label>
+            <input type="file" name="productImage" id="productImage" class="form-control" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid #e5e7eb;">
         </div>
 
         <div style="display: flex; gap: 1rem;">
