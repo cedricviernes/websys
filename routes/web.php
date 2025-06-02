@@ -13,6 +13,7 @@ use App\Http\Controllers\Customer\ReviewController as CustomerReviewController;
 use App\Http\Controllers\Customer\OrderController;
 use App\Http\Controllers\Customer\ProductController as CustomerProductController;
 use App\Http\Controllers\Customer\CategoryController as CustomerCategoryController;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome'); 
@@ -64,7 +65,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 });
 
 // Customer product & category browsing
-Route::get('/products', [CustomerProductController::class, !auth()->check() ? 'indexGuest' : 'index'])->name('products.index');
+Route::get('/products', function(Request $request) {
+    if (auth()->check()) {
+        return app(\App\Http\Controllers\Customer\ProductController::class)->index($request);
+    } else {
+        return app(\App\Http\Controllers\Customer\ProductController::class)->indexGuest($request);
+    }
+})->name('products.index');
 
 // Show product details
 Route::get('/products/{product}', [CustomerProductController::class, 'show'])->name('products.show');
