@@ -78,7 +78,7 @@
 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
                     <button type="submit" style="background: #2563eb; color: #fff; padding: 0.75rem 1.5rem; border-radius: 4px; border: none; cursor: pointer;">Update Cart</button>
-                    <a href="{{ route('checkout.index') }}" style="background: #10b981; color: #fff; padding: 0.75rem 1.5rem; border-radius: 4px; text-decoration: none;">Proceed to Checkout</a>
+                    <a href="{{ auth()->check() ? route('checkout.index') : route('login') }}" style="background: #10b981; color: #fff; padding: 0.75rem 1.5rem; border-radius: 4px; text-decoration: none;">Proceed to Checkout</a>
                 </div>
             </form>
         </div>

@@ -49,7 +49,7 @@ class ProductController extends Controller
         $products = $query->paginate(12);
         $categories = Category::all();
 
-        return view('customer.products.index-guest', compact('products', 'categories'));
+        return view('customer.products.guest', compact('products', 'categories'));
     }
 
     // Show product details
