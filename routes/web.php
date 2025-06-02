@@ -6,12 +6,32 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\ReportController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome'); 
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+//Route for nav-links
+Route::get('about', function () {
+    return view('about'); })->name('about');
+
+Route::get('/products', function () {
+    return view('products.index'); })->name('products');
+
+Route::get('/contact', function () {
+    return view('contact'); })->name('contact');
+
+Route::get('/faq', function () {
+    return view('faq'); })->name('faq');
+
+Route::get('/privacy', function () {
+    return view('privacy'); })->name('privacy');
+
+Route::get('/products/stuffed-toys', function () {
+    return view('products.toys'); })->name('products.toys');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

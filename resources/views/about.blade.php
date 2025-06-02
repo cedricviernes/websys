@@ -224,10 +224,9 @@
           <a class="nav-link {{ Request::is('faq') ? 'active' : '' }}" href="{{ url('faq') }}">FAQs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('privacy') ? 'active' : '' }}" href="{{ url('/privacy') }}">Privacy</a>
+          <a class="nav-link {{ Request::is('privacy') ? 'active' : '' }}" href="{{ url('privacy') }}">Privacy</a>
         </li>
       </ul>
-      
       
       <div class="auth-buttons">
         @if (Route::has('login'))
@@ -249,36 +248,57 @@
   </div>
 </nav>
 
-<!-- Main Content -->
-<div class="main-container">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6 order-lg-1 order-2">
+
+@if(Request::is('about'))
+    <div class="row">
+      <div class="col-12">
         <div class="welcome-card">
-          <h1 class="welcome-title">Let's Get Started!</h1>
-          <p class="welcome-text">Discover a colorful world of fun, quality, and affordability. Join Miniso-inspired shopping now!</p>
-          @auth
-            <a href="{{ url('/dashboard') }}" class="cta-button">Go to Dashboard</a>
-          @else
-            <a href="{{ route('register') }}" class="cta-button">Get Started</a>
-          @endauth
-        </div>
-      </div>
-      
-      <div class="col-lg-6 order-lg-2 order-1">
-        <div class="illustration">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-            <circle cx="32" cy="32" r="30" fill="#ff6f61"/>
-            <text x="50%" y="55%" text-anchor="middle" font-size="2rem" fill="#fff">🎈</text>
-          </svg>
+          <h1 class="welcome-title" style="text-align: center;">About Us</h1>
+          <p class="welcome-text" style="text-align: justify;">Welcome to our Miniso-inspired world of simple, natural, and quality living. We believe that good design should be accessible to everyone, bringing joy and functionality to your everyday life.
+            MINISO is a global lifestyle brand offering high-quality, affordable, and beautifully designed products. Founded in 2013 by Japanese designer Miyake Junya and Chinese entrepreneur Ye Guofu, MINISO brings together creativity,
+             minimalism, and practicality to deliver daily life essentials across categories such as home goods, electronics, beauty, toys, and more.
+          </p>
+          
+          <h2 style="color: #ff6f61; margin-top: 2rem;" >Our Mission</h2>
+          <p>To provide high-quality, affordable products that enhance your lifestyle while maintaining a commitment to sustainability and innovation.</p>
+          
+          <h2 style="color: #ff6f61; margin-top: 2rem;">What We Offer</h2>
+          <div class="row mt-4">
+            <div class="col-md-6 col-lg-3 mb-3">
+              <div class="text-center p-3 bg-light rounded">
+                <div style="font-size: 2rem;">🏠</div>
+                <h5>Home & Living</h5>
+                <p class="mb-0">Beautiful and functional items for your home</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3">
+              <div class="text-center p-3 bg-light rounded">
+                <div style="font-size: 2rem;">🎨</div>
+                <h5>Lifestyle Products</h5>
+                <p class="mb-0">Creative and colorful accessories for daily use</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3">
+              <div class="text-center p-3 bg-light rounded">
+                <div style="font-size: 2rem;">🎁</div>
+                <h5>Gift Items</h5>
+                <p class="mb-0">Perfect gifts for your loved ones</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3">
+              <div class="text-center p-3 bg-light rounded">
+                <div style="font-size: 2rem;">🌱</div>
+                <h5>Eco-Friendly</h5>
+                <p class="mb-0">Sustainable products for a better tomorrow</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+    @endif
 
-
-<!-- Footer -->
+    <!-- Footer -->
 <footer class="footer">
   <div class="container">
     <p class="mb-1">&copy; {{ date('Y') }} Miniso Inspired. All rights reserved.</p>
@@ -291,3 +311,4 @@
 
 </body>
 </html>
+

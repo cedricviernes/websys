@@ -224,10 +224,9 @@
           <a class="nav-link {{ Request::is('faq') ? 'active' : '' }}" href="{{ url('faq') }}">FAQs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('privacy') ? 'active' : '' }}" href="{{ url('/privacy') }}">Privacy</a>
+          <a class="nav-link {{ Request::is('privacy') ? 'active' : '' }}" href="{{ url('privacy') }}">Privacy</a>
         </li>
       </ul>
-      
       
       <div class="auth-buttons">
         @if (Route::has('login'))
@@ -249,34 +248,31 @@
   </div>
 </nav>
 
-<!-- Main Content -->
-<div class="main-container">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6 order-lg-1 order-2">
-        <div class="welcome-card">
-          <h1 class="welcome-title">Let's Get Started!</h1>
-          <p class="welcome-text">Discover a colorful world of fun, quality, and affordability. Join Miniso-inspired shopping now!</p>
-          @auth
-            <a href="{{ url('/dashboard') }}" class="cta-button">Go to Dashboard</a>
-          @else
-            <a href="{{ route('register') }}" class="cta-button">Get Started</a>
-          @endauth
-        </div>
-      </div>
-      
-      <div class="col-lg-6 order-lg-2 order-1">
-        <div class="illustration">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-            <circle cx="32" cy="32" r="30" fill="#ff6f61"/>
-            <text x="50%" y="55%" text-anchor="middle" font-size="2rem" fill="#fff">🎈</text>
-          </svg>
-        </div>
-      </div>
+
+@if(Request::is('privacy'))
+<div class="row">
+  <div class="col-12">
+    <div class="welcome-card">
+      <h1 class="welcome-title" style="text-align: center;">Privacy Policy</h1>
+      <p class="welcome-text">Your privacy is important to us. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.</p>
+
+      <h2 style="color: #ff6f61; margin-top: 2rem;">Information We Collect</h2>
+      <p>We may collect personal information such as your name, email address, and usage data to improve your experience and deliver our services more effectively.</p>
+
+      <h2 style="color: #ff6f61; margin-top: 2rem;">How We Use Your Information</h2>
+      <p>Your information is used to personalize content, respond to inquiries, and improve our products and services. We do not sell your data to third parties.</p>
+
+      <h2 style="color: #ff6f61; margin-top: 2rem;">Data Security</h2>
+      <p>We implement appropriate security measures to protect your data from unauthorized access, alteration, or disclosure.</p>
+
+      <h2 style="color: #ff6f61; margin-top: 2rem;">Your Choices</h2>
+      <p>You can opt out of certain data uses and contact us if you have any questions about your personal information.</p>
+
+      <p class="mt-4">By using our site, you consent to our privacy policy.</p>
     </div>
   </div>
 </div>
-
+@endif
 
 <!-- Footer -->
 <footer class="footer">

@@ -224,10 +224,9 @@
           <a class="nav-link {{ Request::is('faq') ? 'active' : '' }}" href="{{ url('faq') }}">FAQs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('privacy') ? 'active' : '' }}" href="{{ url('/privacy') }}">Privacy</a>
+          <a class="nav-link {{ Request::is('privacy') ? 'active' : '' }}" href="{{ url('privacy') }}">Privacy</a>
         </li>
       </ul>
-      
       
       <div class="auth-buttons">
         @if (Route::has('login'))
@@ -249,34 +248,60 @@
   </div>
 </nav>
 
-<!-- Main Content -->
-<div class="main-container">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6 order-lg-1 order-2">
+@if(Request::is('contact'))
+    <div class="row">
+      <div class="col-12">
         <div class="welcome-card">
-          <h1 class="welcome-title">Let's Get Started!</h1>
-          <p class="welcome-text">Discover a colorful world of fun, quality, and affordability. Join Miniso-inspired shopping now!</p>
-          @auth
-            <a href="{{ url('/dashboard') }}" class="cta-button">Go to Dashboard</a>
-          @else
-            <a href="{{ route('register') }}" class="cta-button">Get Started</a>
-          @endauth
-        </div>
-      </div>
-      
-      <div class="col-lg-6 order-lg-2 order-1">
-        <div class="illustration">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-            <circle cx="32" cy="32" r="30" fill="#ff6f61"/>
-            <text x="50%" y="55%" text-anchor="middle" font-size="2rem" fill="#fff">🎈</text>
-          </svg>
+          <h1 class="welcome-title" style="text-align: center;">Contact Us</h1>
+          <p class="welcome-text text-center">We'd love to hear from you! Get in touch with us using the form below or through our contact information.</p>
+          
+          <div class="row mt-4">
+            <div class="col-lg-8 mx-auto">
+              <form action="#" method="POST">
+                @csrf
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="subject" class="form-label">Subject</label>
+                  <input type="text" class="form-control" id="subject" name="subject" required>
+                </div>
+                <div class="mb-3">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="cta-button">Send Message</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="row mt-5">
+            <div class="col-md-4 text-center mb-3">
+              <h5>📧 Email</h5>
+              <p>hello@miniso-inspired.com</p>
+            </div>
+            <div class="col-md-4 text-center mb-3">
+              <h5>📞 Phone</h5>
+              <p>+63 (934) 123-4567</p>
+            </div>
+            <div class="col-md-4 text-center mb-3">
+              <h5>📍 Address</h5>
+              <p>PSU Urdaneta<br>San Vicente, Urdaneta City</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
+    @endif
 
 <!-- Footer -->
 <footer class="footer">
